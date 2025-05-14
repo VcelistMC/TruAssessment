@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.peter.truassessment.home.ui.composables.ArticleUiItem
 import com.peter.truassessment.home.ui.composables.ArticleUiItemPreview
+import com.peter.truassessment.home.ui.screens.HomeScreenPreview
 import com.peter.truassessment.ui.theme.TRUAssessmentTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             TRUAssessmentTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ArticleUiItemPreview()
+                    HomeScreenPreview()
                 }
             }
         }

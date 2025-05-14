@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,12 +31,13 @@ fun ArticleUiItem(
 ){
     Column(
         modifier = modifier
-            .clickable { onClick() }
             .background(
                 color = MaterialTheme.colorScheme.surfaceContainer,
                 shape = RoundedCornerShape(12.dp),
             )
-            .padding(16.dp),
+            .clickable { onClick() }
+            .padding(16.dp)
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
@@ -46,19 +48,11 @@ fun ArticleUiItem(
 
         article.imageUrl?.let {
             AsyncImage(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxSize(),
                 model = article.imageUrl,
                 contentDescription = null,
             )
         }
-
-        if(article.imageUrl == null && article.body != null){
-            Text(
-                text = article.body,
-                style = MaterialTheme.typography.bodySmall
-            )
-        }
-
     }
 }
 
