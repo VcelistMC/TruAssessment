@@ -78,4 +78,7 @@ dependencies {
     androidTestImplementation("androidx.test:core:1.5.0")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.56.1")
     kaptAndroidTest("com.google.dagger:hilt-compiler:2.56.1")
+
+    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
 }
