@@ -13,11 +13,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.peter.truassessment.home.data.models.ArticleModel
 import com.peter.truassessment.home.ui.composables.ArticleUiItem
+import com.peter.truassessment.home.ui.viewmodels.HomeViewModel
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+    val viewModel = hiltViewModel<HomeViewModel>()
+
+    HomeScreenContent(
+        modifier = modifier,
+        articleList = viewModel.exampleList,
+        onArticleItemClicked = viewModel::onArticleClicked
+    )
 
 }
 
