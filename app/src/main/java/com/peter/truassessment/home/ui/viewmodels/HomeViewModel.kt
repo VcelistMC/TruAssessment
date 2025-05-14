@@ -1,7 +1,7 @@
 package com.peter.truassessment.home.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.peter.truassessment.home.data.models.ArticleModel
+import com.peter.truassessment.home.domain.models.ArticleModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

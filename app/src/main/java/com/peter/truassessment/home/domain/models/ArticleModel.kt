@@ -1,4 +1,4 @@
-package com.peter.truassessment.home.data.models
+package com.peter.truassessment.home.domain.models
 
 data class ArticleModel(
     val title: String,
