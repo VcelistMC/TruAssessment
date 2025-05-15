@@ -30,16 +30,21 @@ import com.peter.truassessment.home.ui.composables.ArticleUiItem
 import com.peter.truassessment.home.ui.intent.HomeIntent
 import com.peter.truassessment.home.ui.state.HomeScreenState
 import com.peter.truassessment.home.ui.viewmodels.HomeViewModel
+import kotlinx.serialization.Serializable
+
+
+@Serializable
+object HomeScreenRoute
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, onArticleItemClicked: (ArticleModel) -> Unit) {
     val viewModel = hiltViewModel<HomeViewModel>()
     val screenState = viewModel.screenState.collectAsStateWithLifecycle()
 
     HomeScreenContent(
         modifier = modifier,
         screenState = screenState.value,
-        onArticleItemClicked = { viewModel.handleIntent(HomeIntent.ViewArticle(it)) },
+        onArticleItemClicked = onArticleItemClicked,
         onRefreshClicked = { viewModel.handleIntent(HomeIntent.LoadArticles) }
     )
 

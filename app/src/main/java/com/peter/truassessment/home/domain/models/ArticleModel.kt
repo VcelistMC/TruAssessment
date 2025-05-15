@@ -1,5 +1,8 @@
 package com.peter.truassessment.home.domain.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class ArticleModel(
     val title: String,
     val imageUrl: String? = null,

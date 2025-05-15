@@ -6,6 +6,7 @@ plugins {
 
     id("org.jetbrains.kotlin.kapt")
     id("dagger.hilt.android.plugin")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -81,4 +82,7 @@ dependencies {
 
     implementation("io.coil-kt.coil3:coil-compose:3.2.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
+
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 }

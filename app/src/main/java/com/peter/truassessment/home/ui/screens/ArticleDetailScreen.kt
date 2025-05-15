@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -24,22 +25,39 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.AsyncImage
 import com.peter.truassessment.home.domain.models.ArticleModel
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class ArticleDetailScreenRoute(
+    val clickedArticle: ArticleModel
+)
 
 @Composable
 fun ArticleDetailScreen(
     modifier: Modifier = Modifier,
+    article: ArticleModel,
+    onBackClicked: () -> Unit
 ) {
 
+    ArticleDetailContent(
+        modifier = modifier,
+        article = article,
+        onBackClicked = onBackClicked
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ArticleDetailContent(
     modifier: Modifier = Modifier,
@@ -52,14 +70,16 @@ fun ArticleDetailContent(
             .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
         topBar = {
 
-            LargeTopAppBar(
-                modifier = Modifier,
+            MediumTopAppBar(
+                modifier = Modifier.fillMaxWidth().padding(end = 8.dp),
                 expandedHeight = 200.dp,
                 title = {
                     Text(
-                        text = article.body,
+                        text = article.title,
                         maxLines = if (topAppBarScrollBehavior.state.collapsedFraction > 0.5f) 1 else Int.MAX_VALUE,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 },
                 navigationIcon = {

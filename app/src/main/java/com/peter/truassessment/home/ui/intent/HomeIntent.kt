@@ -5,5 +5,4 @@ import com.peter.truassessment.home.domain.models.ArticleModel
 
 sealed class HomeIntent: Intent {
     data object LoadArticles: HomeIntent()
-    data class ViewArticle(val articleToView: ArticleModel): HomeIntent()
 }

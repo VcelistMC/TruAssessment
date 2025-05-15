@@ -29,7 +29,6 @@ class HomeViewModel @Inject constructor(
     override fun handleIntent(intent: HomeIntent) {
         when(intent){
             is HomeIntent.LoadArticles -> loadArticles()
-            is HomeIntent.ViewArticle -> {}
         }
     }
 
