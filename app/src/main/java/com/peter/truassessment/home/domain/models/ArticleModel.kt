@@ -3,7 +3,7 @@ package com.peter.truassessment.home.domain.models
 data class ArticleModel(
     val title: String,
     val imageUrl: String? = null,
-    val body: String? = null
+    val body: String
 ){
     companion object {
         val textMock = ArticleModel(
@@ -13,7 +13,8 @@ data class ArticleModel(
 
         val imageMock = ArticleModel(
             title = "Lorem ipsum 2",
-            imageUrl = "https://gratisography.com/wp-content/uploads/2025/01/gratisography-dog-vacation-800x525.jpg"
+            imageUrl = "https://gratisography.com/wp-content/uploads/2025/01/gratisography-dog-vacation-800x525.jpg",
+            body = ""
         )
 
         val imageAndTextMock = ArticleModel(

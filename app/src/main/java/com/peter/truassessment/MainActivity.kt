@@ -1,5 +1,6 @@
 package com.peter.truassessment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,10 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.peter.truassessment.home.domain.models.ArticleModel
+import com.peter.truassessment.home.ui.screens.ArticleDetailContent
 import com.peter.truassessment.home.ui.screens.HomeScreen
 import com.peter.truassessment.ui.theme.TRUAssessmentTheme
 import dagger.hilt.android.AndroidEntryPoint
-
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +23,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             TRUAssessmentTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(modifier = Modifier.padding(innerPadding))
+                    ArticleDetailContent(
+                        modifier = Modifier, article = ArticleModel.imageAndTextMock,
+                        onBackClicked = {  }
+                    )
                 }
             }
         }
