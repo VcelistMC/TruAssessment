@@ -5,5 +5,6 @@ import com.peter.truassessment.home.domain.models.ArticleModel
 
 data class HomeScreenState(
     val isLoading: Boolean,
-    val articlesList: List<ArticleModel>
+    val articlesList: List<ArticleModel>,
+    val exception: Throwable?
 ): State

@@ -3,11 +3,17 @@ package com.peter.truassessment.home.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -33,7 +39,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     HomeScreenContent(
         modifier = modifier,
         screenState = screenState.value,
-        onArticleItemClicked = { viewModel.handleIntent(HomeIntent.ViewArticle(it)) }
+        onArticleItemClicked = { viewModel.handleIntent(HomeIntent.ViewArticle(it)) },
+        onRefreshClicked = { viewModel.handleIntent(HomeIntent.LoadArticles) }
     )
 
 }
@@ -42,17 +49,31 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 fun HomeScreenContent(
     modifier: Modifier = Modifier,
     screenState: HomeScreenState,
-    onArticleItemClicked: (ArticleModel) -> Unit
+    onArticleItemClicked: (ArticleModel) -> Unit,
+    onRefreshClicked: () -> Unit
 ){
     Scaffold(
         modifier = modifier.padding(horizontal = 8.dp),
         topBar = {
-            Text(
-                modifier = Modifier.padding(16.dp),
-                text = "Kotlin News",
-                style = MaterialTheme.typography.displaySmall,
-                fontWeight = FontWeight.Bold
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    modifier = Modifier.padding(vertical = 16.dp),
+                    text = "Kotlin News",
+                    style = MaterialTheme.typography.displaySmall,
+                    fontWeight = FontWeight.Bold
+                )
+
+                IconButton(onClick = onRefreshClicked) {
+                    Icon(
+                        imageVector = Icons.Default.Refresh,
+                        contentDescription = null
+                    )
+                }
+            }
         }
     ) { padding ->
         if(screenState.isLoading){
@@ -61,6 +82,13 @@ fun HomeScreenContent(
                 contentAlignment = Alignment.Center
             ){
                 CircularProgressIndicator()
+            }
+        }else if(screenState.exception != null){
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(text = screenState.exception.message?: "Unknown")
             }
         }else {
             LazyColumn(

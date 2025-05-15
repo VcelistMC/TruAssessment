@@ -16,5 +16,6 @@ data class ArticleDTO(
 
 data class ArticleDataDTO(
     @SerializedName("selftext") val body: String,
-    val title: String
+    val title: String,
+    @SerializedName("url_overridden_by_dest") val imageUrl: String
 )

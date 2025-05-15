@@ -6,9 +6,9 @@ import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class ArticleMockDataSource @Inject constructor(): ArticleDataSource {
-    override suspend fun getArticles(): List<ArticleModel> {
+    override suspend fun getArticles(): Result<List<ArticleModel>> {
         delay(2500)
-        return listOf(
+        val articlesList =  listOf(
             ArticleModel.textMock,
             ArticleModel.textMock,
             ArticleModel.imageMock,
@@ -16,5 +16,6 @@ class ArticleMockDataSource @Inject constructor(): ArticleDataSource {
             ArticleModel.imageMock,
             ArticleModel.imageMock,
         )
+        return Result.success(articlesList)
     }
 }

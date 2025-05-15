@@ -12,7 +12,9 @@ class ArticleRepoImpl @Inject constructor(
     private val mockDataSource: ArticleMockDataSource,
     private val remoteDataSource: ArticleRemoteDataSource
 ): ArticleRepo {
-    override suspend fun getArticles(): Flow<List<ArticleModel>> {
-        return flow { emit(remoteDataSource.getArticles()) }
+    override fun getArticles(): Flow<Result<List<ArticleModel>>> {
+        return flow {
+            emit(remoteDataSource.getArticles())
+        }
     }
 }
