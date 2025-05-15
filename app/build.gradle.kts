@@ -1,3 +1,5 @@
+import com.google.protobuf.gradle.*
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,6 +9,7 @@ plugins {
     id("org.jetbrains.kotlin.kapt")
     id("dagger.hilt.android.plugin")
     alias(libs.plugins.kotlin.serialization)
+    id("com.google.protobuf") version "0.9.1"
 }
 
 android {
@@ -82,7 +85,24 @@ dependencies {
 
     implementation("io.coil-kt.coil3:coil-compose:3.2.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
-
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+
+    implementation("androidx.datastore:datastore:1.1.6")
+    implementation("com.google.protobuf:protobuf-javalite:3.18.0")
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.18.0"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins{
+                id("java"){
+                    option("lite")
+                }
+            }
+        }
+    }
 }
