@@ -91,6 +91,9 @@ dependencies {
     implementation("androidx.datastore:datastore:1.1.6")
     implementation("com.google.protobuf:protobuf-javalite:3.18.0")
 }
+kapt {
+    correctErrorTypes=true
+}
 
 protobuf {
     protoc {
