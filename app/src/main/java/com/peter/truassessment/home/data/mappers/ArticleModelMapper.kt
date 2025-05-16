@@ -22,15 +22,3 @@ fun ArticleProtoModel.mapToDomainArticleModel(): ArticleModel{
         imageUrl = imageUrl
     )
 }
-
-fun ArticleModel.mapToProtoArticleModel(): ArticleProtoModel{
-    return ArticleProtoModel.newBuilder()
-        .setTitle(title)
-        .setBody(body)
-        .also { articleProtoModel ->
-            imageUrl?.let {
-                articleProtoModel.setImageUrl(imageUrl)
-            }
-        }
-        .build()
-}
