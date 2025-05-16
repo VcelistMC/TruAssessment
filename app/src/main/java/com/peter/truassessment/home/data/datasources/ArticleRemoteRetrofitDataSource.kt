@@ -7,7 +7,7 @@ import com.peter.truassessment.home.domain.datasources.ArticleRemoteDataSource
 import com.peter.truassessment.home.domain.models.ArticleModel
 import javax.inject.Inject
 
-class ArticleRemoteDataSource @Inject constructor(
+class ArticleRemoteRetrofitDataSource @Inject constructor(
     private val articlesApi: ArticlesApi
 ) : ArticleRemoteDataSource, SafeCallable {
     override suspend fun getArticles(): Result<List<ArticleModel>> {

@@ -1,8 +1,10 @@
 package com.peter.truassessment.home.data.repo
 
 import com.peter.truassessment.home.data.datasources.ArticleMockRemoteDataSource
-import com.peter.truassessment.home.data.datasources.ArticleRemoteDataSource
-import com.peter.truassessment.home.data.datasources.ArticleLocalDataSource
+import com.peter.truassessment.home.data.datasources.ArticleRemoteRetrofitDataSource
+import com.peter.truassessment.home.data.datasources.ArticleLocalProtoDataSource
+import com.peter.truassessment.home.domain.datasources.ArticleLocalDataSource
+import com.peter.truassessment.home.domain.datasources.ArticleRemoteDataSource
 import com.peter.truassessment.home.domain.models.ArticleModel
 import com.peter.truassessment.home.domain.repo.ArticleRepo
 import kotlinx.coroutines.flow.Flow

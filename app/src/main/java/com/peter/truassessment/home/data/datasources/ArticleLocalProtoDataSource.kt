@@ -10,7 +10,7 @@ import com.peter.truassessment.proto.ArticleProtoModel
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
-class ArticleLocalDataSource @Inject constructor(
+class ArticleLocalProtoDataSource @Inject constructor(
     private val articlesDataStore: DataStore<ArticleList>
 ): ArticleLocalDataSource {
     override suspend fun getArticles(): Result<List<ArticleModel>> {
