@@ -1,4 +1,4 @@
-package com.peter.truassessment.home.di
+package com.peter.truassessment.common.di
 
 import com.peter.truassessment.home.data.remote.ArticlesApi
 import dagger.Module
@@ -11,14 +11,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class HomeNetworkModule {
-
+object AppModule {
     @Provides
     @Singleton
-    fun provideArticlesApi(
-        retrofit: Retrofit
-    ): ArticlesApi {
-        return retrofit
-            .create(ArticlesApi::class.java)
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://www.reddit.com/r/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 }
