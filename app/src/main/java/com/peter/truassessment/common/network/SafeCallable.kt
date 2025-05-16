@@ -1,8 +1,7 @@
 package com.peter.truassessment.common.network
 
-import coil3.network.HttpException
+import com.peter.truassessment.common.network.exceptions.EmptyBodyException
 import com.peter.truassessment.common.network.exceptions.NoInternetException
-import com.peter.truassessment.home.domain.models.ArticleModel
 import retrofit2.Response
 import java.io.IOException
 
@@ -11,24 +10,21 @@ interface SafeCallable {
         request: suspend () -> Response<T>,
         mapResponse: (T) -> R
     ): Result<R> {
-        return try {
-            val response = request()
-            if (response.isSuccessful) {
-                val body = response.body()
-                if (body != null) {
-                    val mappedResponse = mapResponse(body)
-                    Result.success(mappedResponse)
-                } else {
-                    Result.failure(Throwable("Empty Body"))
+        return runCatching { request() }
+            .mapCatching { response ->
+                if (!response.isSuccessful) {
+                    val errorBody = response.errorBody()?.string()
+                    throw Throwable("API Error ${response.code()}: $errorBody")
                 }
-            } else {
-                val errorBody = response.errorBody()?.string()
-                Result.failure(Throwable("API Error ${response.code()}: $errorBody"))
+
+                val body = response.body() ?: throw EmptyBodyException()
+                mapResponse(body)
             }
-        } catch (e: IOException) {
-            Result.failure(NoInternetException())
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+            .recoverCatching { e ->
+                when (e) {
+                    is IOException -> throw NoInternetException()
+                    else -> throw e
+                }
+            }
     }
 }

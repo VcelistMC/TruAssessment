@@ -4,8 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
-import com.peter.truassessment.home.data.proto.PROTO_DATA_STORE_FILENAME
-import com.peter.truassessment.home.data.proto.articleListDataStore
+import com.peter.truassessment.common.Config
 import com.peter.truassessment.home.data.proto.serializers.ArticleListSerializer
 import com.peter.truassessment.proto.ArticleList
 import dagger.Module
@@ -26,7 +25,7 @@ object HomeProtoModule {
         return DataStoreFactory.create(
             serializer = ArticleListSerializer
         ){
-            context.dataStoreFile(PROTO_DATA_STORE_FILENAME)
+            context.dataStoreFile(Config.PROTO_DATA_STORE_FILENAME)
         }
     }
 }

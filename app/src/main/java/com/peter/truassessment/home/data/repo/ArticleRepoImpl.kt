@@ -12,21 +12,28 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class ArticleRepoImpl @Inject constructor(
-    private val mockDataSource: ArticleMockRemoteDataSource,
     private val remoteDataSource: ArticleRemoteDataSource,
     private val localDataSource: ArticleLocalDataSource
 ): ArticleRepo {
-    override fun getArticles(): Flow<Result<List<ArticleModel>>> {
-        return flow {
-            val articlesResult = remoteDataSource.getArticles()
-            if(articlesResult.isSuccess){
-                val articleList = articlesResult.getOrNull()!!
-                emit(remoteDataSource.getArticles())
-                localDataSource.saveArticles(articleList)
-            }else{
-                val localArticleListResult = localDataSource.getArticles()
-                emit(localArticleListResult)
+    override fun getArticles(): Flow<Result<List<ArticleModel>>> = flow {
+        remoteDataSource.getArticles()
+            .onSuccess { articles ->
+                emit(Result.success(articles))
+                localDataSource.saveArticles(articles)
             }
-        }
+            .onFailure { remoteError ->
+                localDataSource.getArticles()
+                    .onSuccess { cached ->
+                        if (cached.isEmpty()) {
+                            emit(Result.failure(remoteError))
+                        } else {
+                            emit(Result.success(cached))
+                        }
+                    }
+                    .onFailure { localError ->
+                        emit(Result.failure(localError))
+                    }
+            }
     }
+
 }
