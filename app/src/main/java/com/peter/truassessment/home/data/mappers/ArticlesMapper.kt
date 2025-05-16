@@ -2,6 +2,7 @@ package com.peter.truassessment.home.data.mappers
 
 import com.peter.truassessment.home.data.dtos.SubredditDTO
 import com.peter.truassessment.home.domain.models.ArticleModel
+
 import com.peter.truassessment.proto.ArticleProtoModel
 
 fun SubredditDTO.getArticlesModels(): List<ArticleModel> {
@@ -26,6 +27,10 @@ fun ArticleModel.mapToProtoArticleModel(): ArticleProtoModel{
     return ArticleProtoModel.newBuilder()
         .setTitle(title)
         .setBody(body)
-        .setImageUrl(imageUrl)
+        .also { articleProtoModel ->
+            imageUrl?.let {
+                articleProtoModel.setImageUrl(imageUrl)
+            }
+        }
         .build()
 }

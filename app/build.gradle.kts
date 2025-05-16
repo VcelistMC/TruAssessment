@@ -49,7 +49,7 @@ android {
     }
     sourceSets {
         getByName("main"){
-            java.srcDirs("build/generated/source/proto/debug/java/com/peter/truassessment/proto")
+            java.srcDirs("build/generated/source/proto/debug/java")
         }
     }
 }
