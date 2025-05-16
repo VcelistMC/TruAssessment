@@ -97,6 +97,8 @@ dependencies {
 
     implementation("androidx.datastore:datastore:1.1.6")
     implementation("com.google.protobuf:protobuf-javalite:3.24.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
 kapt {
     correctErrorTypes=true
