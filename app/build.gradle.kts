@@ -1,4 +1,6 @@
 import com.google.protobuf.gradle.*
+import org.gradle.internal.extensions.stdlib.capitalized
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.android.application)
@@ -45,6 +47,11 @@ android {
     buildFeatures {
         compose = true
     }
+    sourceSets {
+        getByName("main"){
+            java.srcDirs("build/generated/source/proto/debug/java/com/peter/truassessment/proto")
+        }
+    }
 }
 
 dependencies {
@@ -89,15 +96,19 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     implementation("androidx.datastore:datastore:1.1.6")
-    implementation("com.google.protobuf:protobuf-javalite:3.18.0")
+    implementation("com.google.protobuf:protobuf-javalite:3.24.1")
 }
 kapt {
     correctErrorTypes=true
 }
 
+sourceSets {
+
+}
+
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.18.0"
+        artifact = "com.google.protobuf:protoc:3.24.1"
     }
     generateProtoTasks {
         all().forEach { task ->
