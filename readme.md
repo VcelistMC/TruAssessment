@@ -1,6 +1,6 @@
 # TruAssessment App
 
-Welcome to the TruAssessment App repository! This project is designed to showcase a modern Android application architecture using the Model-View-Intent (MVI) pattern. Below, you'll find detailed information about the architecture, design patterns, and third-party libraries used in this project.
+Welcome to the TruAssessment App repository! This project is designed to showcase a modern Android application architecture using the Model-View-Intent (MVI) pattern. Below, you'll find detailed information about the architecture, design patterns, and third-party libraries used in this project. At the bottom you'll find why I chose flows over RxJava
 
 ## Architecture Overview
 
