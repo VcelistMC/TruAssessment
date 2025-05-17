@@ -7,6 +7,7 @@ import com.peter.truassessment.home.domain.usecases.GetArticlesUseCase
 import com.peter.truassessment.home.ui.intent.HomeIntent
 import com.peter.truassessment.home.ui.state.HomeScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,7 +35,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadArticles(){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             getArticlesUseCase()
                 .onStart { updateState { it.copy(isLoading = true) } }
                 .collect { result ->

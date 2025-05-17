@@ -104,9 +104,6 @@ kapt {
     correctErrorTypes=true
 }
 
-sourceSets {
-
-}
 
 protobuf {
     protoc {
